@@ -5,14 +5,9 @@ class Solution:
         :type target: int
         :rtype: List[int]
         """
-        # dict = {}
-        # for i, v in enumerate(nums):
-        #     if target-v in dict:
-        #         return [dict[target-v], i]
-        #     dict[v] = i
 
-        dict = {}
+        d = {}
         for i, v in enumerate(nums):
-            if v in dict:
-                return [dict[v], i]
-            dict[target - v] = i
+            if v in d:
+                return [d[v], i]
+            d[target - v] = i
