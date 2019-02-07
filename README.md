@@ -3,6 +3,7 @@ This is a repository for practicing coding skills and sharing experiences for gr
 
 ## Problem To Solve
 * [771 Jewels and Stones](https://leetcode.com/problems/jewels-and-stones/)
+* [929 Unique Email Addresses](https://leetcode.com/problems/unique-email-addresses/)
 
 ## Problem Solved
 | \# | Problems | Solutions | Note |
