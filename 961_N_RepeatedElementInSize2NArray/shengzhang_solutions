@@ -7,3 +7,9 @@ class Solution:
             if val == len(A)/2:
                 return key
         return None
+        
+        
+if __name__ == "__main__":
+    A = [1,2,3,3]
+    a = Solution().repeatedNTimes(A)
+    print(a)
