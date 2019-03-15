@@ -19,3 +19,8 @@ class Solution:
         else:
             return False
         return False
+
+if __name__ == "__main__":
+    moves = "LDRRLRUULR"
+    a = Solution().judgeCircle(moves)
+    print(a)
