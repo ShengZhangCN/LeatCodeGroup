@@ -1,0 +1,9 @@
+from collections import Counter
+class Solution:
+    def repeatedNTimes(self, A: List[int]) -> int:
+        # bulitin function collections.Counter() is very usefull in counting 
+        c = Counter(A)
+        for key, val in c.items():
+            if val == len(A)/2:
+                return key
+        return None
