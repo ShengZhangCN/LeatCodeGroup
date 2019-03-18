@@ -1,12 +1,14 @@
 class Solution:
-    def sortArrayByParityII(self, A: List[int]) -> List[int]:
-        if len(A) == 0:
-            return []
-        A = sorted(A)
-        l_odd = [ i for i in A if i % 2 == 1]
-        l_even = [i for i in A if i % 2 == 0]
-        ans = []
-        for i in range(len(l_odd)):
-            ans.append(l_even[i])
-            ans.append(l_odd[i])
-        return ans
+    def isUnivalTree(self, root: TreeNode) -> bool:
+        self.val = root.val
+        # val = root.val
+        return self.pre_order(root)
+        
+    def pre_order(self, root):
+        if root is None:
+            return True
+        if root.val != self.val:
+            return False
+            
+        return self.pre_order(root.left) and self.pre_order(root.right)
+        
