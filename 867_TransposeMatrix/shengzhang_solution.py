@@ -12,3 +12,7 @@ class Solution:
             B.append(tmp)
             
         return B
+    
+        # one line solutions
+        # return [[*i] for i in zip(*A)]
+        # return list(map(list, zip(*A)))
