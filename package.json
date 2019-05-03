@@ -1,0 +1,23 @@
+{
+  "name": "leetcodegroup",
+  "version": "1.0.0",
+  "description": "This is a repository for practicing coding skills and sharing experiences for group members. Here are [all the problems](https://leetcode.com/problemset/all/).",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "add-problems": "node add_problems.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShengZhangCN/LeetCodeGroup.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShengZhangCN/LeetCodeGroup/issues"
+  },
+  "homepage": "https://github.com/ShengZhangCN/LeetCodeGroup#readme",
+  "dependencies": {
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
+}

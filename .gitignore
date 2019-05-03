@@ -1,1 +1,4 @@
 .idea
+/node_modules
+api_key.js
+sorted_problems.json
