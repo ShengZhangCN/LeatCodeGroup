@@ -72,6 +72,16 @@ var getLastProblem = (problems) => {
     return lastProblemName[0];
 }
 
+var getProblemsFromIssue = (issue) =>{
+    const regex = /\- \[.+\]\(.+\)/g;
+    var problems = issue.body.match(regex);
+
+    return problems.map(item =>{
+        const reg = /\[.+\]/g;
+        return item.match(reg)[0].slice(1).slice(0, -1);
+    });
+
+}
 
 var getAllProblems = async () => {
     const options = {
@@ -145,7 +155,6 @@ var composeIssueBody = (problems) => {
     return body;
 }
 
-
 var addProblemsLinkToREADME = (issue) => {
     let readme = fs.readFileSync("./README.md", 'utf8');
     const regex = /\- \[.+\]\(.+\)/g;
@@ -167,26 +176,50 @@ var addProblemsLinkToREADME = (issue) => {
 
 }
 
+var createSolutionDirectory = (problems, solutionName) =>{
+
+    problems.forEach(problem => {
+        var dirName = problem.split(" ").join("").split(".").join("_");
+        // console.log(dirName);
+
+        var path = `./${dirName}/${solutionName}`;
+
+        if (!fs.existsSync(`./${dirName}`)){
+            fs.mkdirSync(`./${dirName}`);
+        }
+        fs.writeFileSync(path, "");
+    });
+
+}
+
+
+
 (async () => {
+    // var latestIssue = await getLatestIssue();
+    // // console.log(`[${lastIssue.title}](${lastIssue.html_url})`);
+    // var lastProblemName = getLastProblem(latestIssue);
+    // // console.log(lastProblemName);
+    //
+    // var problems = await getAllProblems();
+    // // console.log(problems[0].difficulty)
+    // var sortedProblems = sortProblems(problems);
+    // // fs.writeFile('sorted_problems.json', JSON.stringify(sortedProblems), error=>{
+    // //     if (error){
+    // //         throw error;
+    // //     }
+    // //     console.log("File is saved");
+    // // });
+    // var newProblems = getNewProblems(sortedProblems, lastProblemName, 5);
+    // // console.log(newProblems);
+    // await createIssue(`Week ${parseInt(lastIssue.title.split(" ")[1]) + 1}`, composeIssueBody(newProblems));
+    //
     var latestIssue = await getLatestIssue();
-    // console.log(`[${lastIssue.title}](${lastIssue.html_url})`);
-    var lastProblemName = getLastProblem(latestIssue);
-    // console.log(lastProblemName);
+    // console.log(latestIssue.body);
+    var problems = getProblemsFromIssue(latestIssue);
+    console.log(problems);
+    // addProblemsLinkToREADME(lastIssue);
 
-    var problems = await getAllProblems();
-    // console.log(problems[0].difficulty)
-    var sortedProblems = sortProblems(problems);
-    // fs.writeFile('sorted_problems.json', JSON.stringify(sortedProblems), error=>{
-    //     if (error){
-    //         throw error;
-    //     }
-    //     console.log("File is saved");
-    // });
-    var newProblems = getNewProblems(sortedProblems, lastProblemName, 5);
-    // console.log(newProblems);
-    await createIssue(`Week ${parseInt(lastIssue.title.split(" ")[1]) + 1}`, composeIssueBody(newProblems));
-
-    latestIssue = await getLatestIssue();
-    addProblemsLinkToREADME(lastIssue);
+    // var problems = [];
+    createSolutionDirectory(problems, "yicheng_solution.js");
 
 })();
