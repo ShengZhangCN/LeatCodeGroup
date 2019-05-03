@@ -36,7 +36,7 @@ var createIssue = async (title, body) => {
 }
 
 // Get latest issue on Github
-var getLastIssue = async () => {
+var getLatestIssue = async () => {
     const options = {
         url: `${GITHUB_URL}/issues`,
         method: "GET",
@@ -72,9 +72,6 @@ var getLastProblem = (problems) => {
     return lastProblemName[0];
 }
 
-var getProblemsForThisWeek = async (numberOfProblems) => {
-
-}
 
 var getAllProblems = async () => {
     const options = {
@@ -113,7 +110,7 @@ var sortProblems = (problems) => {
     });
 
     problems = problems.filter((item, index) => {
-        if (!item.paid_only){
+        if (!item.paid_only) {
             return true;
         }
     });
@@ -121,11 +118,11 @@ var sortProblems = (problems) => {
     return problems;
 }
 
-var getNewProblems = (allProblems, lastProblem, numOfNewProblems) =>{
+var getNewProblems = (allProblems, lastProblem, numOfNewProblems) => {
     var newProblems = [];
     var lastProblemIndex;
     allProblems.forEach((problem, index) => {
-        if (problem.stat.question_id == lastProblem.split(".")[0]){
+        if (problem.stat.question_id == lastProblem.split(".")[0]) {
             lastProblemIndex = index;
             return;
         }
@@ -148,23 +145,48 @@ var composeIssueBody = (problems) => {
     return body;
 }
 
+
+var addProblemsLinkToREADME = (issue) => {
+    let readme = fs.readFileSync("./README.md", 'utf8');
+    const regex = /\- \[.+\]\(.+\)/g;
+    let matches = readme.match(regex);
+    // console.log(matches);
+
+    var problemLink = `- [${issue.title}](${issue.html_url})`;
+
+    if (!matches.includes(problemLink)){
+        var position = readme.indexOf(matches[0]);
+        var updatedReadme = [readme.slice(0, position), `${problemLink}\n`,
+        readme.slice(position)].join("");
+        fs.writeFile("./README.md", updatedReadme, error => {
+            if (error) throw error;
+            console.log("README updated");
+        });
+    }
+
+
+}
+
 (async () => {
-    var lastIssue = await getLastIssue();
-    var lastProblemName = getLastProblem(lastIssue);
-    console.log(lastProblemName);
+    var latestIssue = await getLatestIssue();
+    // console.log(`[${lastIssue.title}](${lastIssue.html_url})`);
+    var lastProblemName = getLastProblem(latestIssue);
+    // console.log(lastProblemName);
 
     var problems = await getAllProblems();
     // console.log(problems[0].difficulty)
     var sortedProblems = sortProblems(problems);
-    fs.writeFile('sorted_problems.json', JSON.stringify(sortedProblems), error=>{
-        if (error){
-            throw error;
-        }
-        console.log("File is saved");
-    });
-
-    // var newProblems = getNewProblems(sortedProblems, lastProblemName, 5);
+    // fs.writeFile('sorted_problems.json', JSON.stringify(sortedProblems), error=>{
+    //     if (error){
+    //         throw error;
+    //     }
+    //     console.log("File is saved");
+    // });
+    var newProblems = getNewProblems(sortedProblems, lastProblemName, 5);
     // console.log(newProblems);
-    // await createIssue(`Week ${parseInt(lastIssue.title.split(" ")[1]) + 1}`, composeIssueBody(newProblems));
+    await createIssue(`Week ${parseInt(lastIssue.title.split(" ")[1]) + 1}`, composeIssueBody(newProblems));
+
+    latestIssue = await getLatestIssue();
+    addProblemsLinkToREADME(lastIssue);
 
 })();
