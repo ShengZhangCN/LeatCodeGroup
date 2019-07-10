@@ -1,23 +1,34 @@
 {
-  "name": "leetcodegroup",
-  "version": "1.0.0",
-  "description": "This is a repository for practicing coding skills and sharing experiences for group members. Here are [all the problems](https://leetcode.com/problemset/all/).",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "add-problems": "node add_problems.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ShengZhangCN/LeetCodeGroup.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ShengZhangCN/LeetCodeGroup/issues"
-  },
-  "homepage": "https://github.com/ShengZhangCN/LeetCodeGroup#readme",
-  "dependencies": {
-    "request": "^2.88.0",
-    "request-promise": "^4.2.4"
-  }
+    "name": "leetcodegroup",
+    "version": "1.0.0",
+    "description": "This is a repository for practicing coding skills and sharing experiences for group members. Here are [all the problems](https://leetcode.com/problemset/all/).",
+    "scripts": {
+        "test": "jest",
+        "coverage": "jest --coverage",
+        "add-problems": "node add_problems.js",
+        "add-solutions": "node add_solutions.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ShengZhangCN/LeetCodeGroup.git"
+    },
+    "jest": {
+        "collectCoverageFrom": [
+            "**/*.{js,jsx}",
+            "!**/node_modules/**",
+            "!**/vendor/**",
+            "!**/coverage/**"
+        ]
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ShengZhangCN/LeetCodeGroup/issues"
+    },
+    "homepage": "https://github.com/ShengZhangCN/LeetCodeGroup#readme",
+    "dependencies": {
+        "request": "^2.88.0",
+        "request-promise": "^4.2.4",
+        "jest": "^24.8.0"
+    }
 }
