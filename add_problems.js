@@ -180,8 +180,8 @@ var addNewProblems = async () =>{
 
 if (require.main == module){
     (async () => {
-        console.log("haha");
-        // await addNewProblems();
+        // console.log("haha");
+        await addNewProblems();
 
         // await addSolutionsFromLatestProblems();
 
