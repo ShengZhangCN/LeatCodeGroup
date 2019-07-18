@@ -2,6 +2,7 @@
 This is a repository for practicing coding skills and sharing experiences for group members. Here are [all the problems](https://leetcode.com/problemset/all/).
 
 ## Problem To Solve
+- [Week 19](https://github.com/ShengZhangCN/LeetCodeGroup/issues/28)
 - [Week 18](https://github.com/ShengZhangCN/LeetCodeGroup/issues/27)
 - [Week 17](https://github.com/ShengZhangCN/LeetCodeGroup/issues/26)
 - [Week 16](https://github.com/ShengZhangCN/LeetCodeGroup/issues/25)
