@@ -21,6 +21,7 @@ var findTarget = function(root, k) {
 
   return false;
 };
+
 var inOrder = (root, list) => {
   if (root == null) {
     return list;
@@ -31,6 +32,7 @@ var inOrder = (root, list) => {
   inOrder(root.right, list);
   return list;
 };
+
 module.exports = {
   TreeNode,
   findTarget
